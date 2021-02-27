@@ -32,10 +32,14 @@ for i in range(steps):  # loop for 300 timesteps
 
     if xvalcor[i+1] < 0:  # corrected reflection off surface
 
-        tfrac[i+1] = (np.abs(vvalcor[i])+np.sqrt(2*g*xvalcor[i]+(np.abs(vvalcor[i]))**2))/g # calculate which fraction of the timestep it will take to hit exactly x=0
-        vfloor[i] = np.sqrt(xvalcor[i]*2*g+(vvalcor[i])**2) # calculate the velocity it would be travelling at exactly x=0
+        tfrac[i+1] = xval[i]/(xval[i]+xvalcor[i+1]) # calculate which fraction of the timestep it will take to hit
+        # exactly x=0
+
+        vfloor[i] = np.sqrt(xvalcor[i]*2*g+(vvalcor[i])**2) # calculate the velocity it would be travelling at
+        # exactly x=0
         vvalcor[i+1] = (vfloor[i] - g*dt*(1-tfrac[i+1]))  # calculate the velocity at the end of the timestep
-        xvalcor[i+1] = ((vvalcor[i+1]+vfloor[i])/2)*(1-tfrac[i+1])*dt # calculate the position at the end of the timestep
+        xvalcor[i+1] = ((vvalcor[i+1]+vfloor[i])/2)*(1-tfrac[i+1])*dt # calculate the position at the end of the
+        # timestep
     else:
         tfrac[i] = 0
         vfloor[i] = 0
