@@ -45,8 +45,3 @@ def function(x):
 
 
 print(bisect_root(function,-0.1,0.1,0.0001))
-
-# c = (a + b) / 2
-# fc = f(c)
-# if fc == 0:
-#     return c, n
