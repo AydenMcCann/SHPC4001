@@ -33,7 +33,8 @@ def sigfig(x, y):  # rounding to significant figures
 for i in range(len(rootarray)):  # calculating roots and rounding to 6 significant figures
     rootarray[i] = optimize.newton(f, j0_zero_guesses[i], fprime=fd, rtol=0.0001)
     rootarray[i] = sigfig(rootarray[i], 6)
-    error[i] = np.abs(rootarray[i] - docval[i])
+    error[i] = np.abs(rootarray[i] - docval[i]) # calculating the absolute difference in the jn_zeros fn
+    
 
 # visualize
 fig, ax = plt.subplots()
@@ -43,6 +44,8 @@ lines = ax.plot(x_values, j_values, '-b', j0_zero_guesses, np.zeros_like(j0_zero
 ax.set_xlabel('$x$')
 ax.legend(lines, ('$J_0(x)$', '(approximate) zeros of $J_0(x)$', '(accurate) zeros of $J_0(x)$'))
 
-plt.show()
+print("Average error when compared to jn_zeros = {}".format(sum(error) / 100))   # printing error 
 
-print("Average error when compared to jn_zeros = {}".format(sum(error) / 100))
+plt.show() # showing plot
+
+
