@@ -19,14 +19,20 @@ def fd(x):
     return sp.jvp(0, x)
 
 
-for i in range(len(rootarray)):         # calculating roots and rounding to 6 significant figures
+def sigfig(x, y):  # rounding to significant figures
+    if x < 1:
+        r = round(x, y)
+        return r
+    else:
+        for i in range(len(str(x))):
+            if 10 ** i < x <= 10 ** (i + 1):
+                r = round(x, y - i - 1)
+                return r
+
+
+for i in range(len(rootarray)):  # calculating roots and rounding to 6 significant figures
     rootarray[i] = optimize.newton(f, j0_zero_guesses[i], fprime=fd, rtol=0.0001)
-    if rootarray[i] < 10:
-        rootarray[i] = round(rootarray[i], 5)
-    if 100 > rootarray[i] >= 10:
-        rootarray[i] = round(rootarray[i], 4)
-    if rootarray[i] > 100:
-        rootarray[i] = round(rootarray[i], 3)
+    rootarray[i] = sigfig(rootarray[i], 6)
     error[i] = np.abs(rootarray[i] - docval[i])
 
 # visualize
