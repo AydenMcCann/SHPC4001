@@ -15,10 +15,6 @@ cxval = np.empty(steps)  # creating empty arrays for results
 sxval = np.empty(steps)
 errcx = np.empty(steps)
 errsx = np.empty(steps)
-S = np.empty(steps)
-C = np.empty(steps)
-Serr = np.empty(steps)
-Cerr = np.empty(steps)
 
 
 
